@@ -14,10 +14,8 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 
 function estConnecte($session){
-  //return isset($_SESSION['idVisiteur']);
-//    $request = Request::createFromGlobals();
-//    $session = $request->getSession();
-      return $session->getFlashBag()->has('id');
+//      return $session->getFlashBag()->has('id');
+    return $session->has('id');
 }
 /**
  * Enregistre dans une variable session les infos d'un visiteur
@@ -26,23 +24,23 @@ function estConnecte($session){
  * @param $nom
  * @param $prenom
  */
-function connecter($session, $id,$nom,$prenom){
-//	$_SESSION['idVisiteur']= $id; 
-//	$_SESSION['nom']= $nom;
-////	$_SESSION['prenom']= $prenom;
-//     $request = Request::createFromGlobals();
-//    $session = $request->getSession();
-    $session->getFlashBag()->add('id',$id);
-     $session->getFlashBag()->add('nom',$nom);
-      $session->getFlashBag()->add('prenom',$prenom);
-     
-}
-/**
- * Détruit la session active
- */
-function deconnecter(){
-	session_destroy();
-}
+//function connecter($session, $id,$nom,$prenom){
+////	$_SESSION['idVisiteur']= $id; 
+////	$_SESSION['nom']= $nom;
+//////	$_SESSION['prenom']= $prenom;
+////     $request = Request::createFromGlobals();
+////    $session = $request->getSession();
+//    $session->getFlashBag()->add('id',$id);
+//     $session->getFlashBag()->add('nom',$nom);
+//      $session->getFlashBag()->add('prenom',$prenom);
+//     
+//}
+///**
+// * Détruit la session active
+// */
+//function deconnecter(){
+//	session_destroy();
+//}
 /**
  * Transforme une date au format français jj/mm/aaaa vers le format anglais aaaa-mm-jj
  
