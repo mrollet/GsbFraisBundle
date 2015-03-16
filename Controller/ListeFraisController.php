@@ -9,7 +9,8 @@ class ListeFraisController extends Controller
 {
     public function indexAction()
     {
-        $session= $this->container->get('request')->getSession();
+//        $session= $this->container->get('request')->getSession();
+        $session= $this->get('request')->getSession();
         $idVisiteur =  $session->get('id');
         $pdo = PdoGsb::getPdoGsb();
 //        $pdo = $this->get('pg_gsb_frais.pdo');
@@ -21,7 +22,7 @@ class ListeFraisController extends Controller
             $lesCles = array_keys( $lesMois );
             $moisASelectionner = $lesCles[0];
             return $this->render('PgGsbFraisBundle:ListeFrais:listemois.html.twig',
-                array('lesmois'=>$lesMois,'lemois'=>$moisASelectionner));
+                array('lesmois'=>$lesMois,'lemois'=>$moisASelectionner, 'AffichFrais'=>'N'));
         }
         else{
             $request = $this->get('request');
@@ -36,10 +37,10 @@ class ListeFraisController extends Controller
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
             $dateModif =  $lesInfosFicheFrais['dateModif'];
             $dateModif =  dateAnglaisVersFrancais($dateModif);
-            return $this->render('PgGsbFraisBundle:ListeFrais:listetouslesfrais.html.twig',
+            return $this->render('PgGsbFraisBundle:ListeFrais:listemois.html.twig',
                 array('lesmois'=>$lesMois,'lesfraisforfait'=>$lesFraisForfait,'lesfraishorsforfait'=>$lesFraisHorsForfait,
                     'lemois'=>$leMois,'numannee'=>$numAnnee,'nummois'=> $numMois,'libetat'=>$libEtat,
-                        'montantvalide'=>$montantValide,'nbjustificatifs'=>$nbJustificatifs,'datemodif'=>$dateModif));
+                        'montantvalide'=>$montantValide,'nbjustificatifs'=>$nbJustificatifs,'datemodif'=>$dateModif, 'AffichFrais'=>'O'));
             
         }
         

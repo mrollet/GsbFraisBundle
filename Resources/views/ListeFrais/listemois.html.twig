@@ -28,5 +28,12 @@
       </p> 
       </div>
         </form>
+ {% if AffichFrais == 'O' %}
+     {% include 'PgGsbFraisBundle:ListeFrais:listefraisforfait.html.twig' with {'lesfraisforfait':lesfraisforfait,'numannee':numannee,
+'nummois':nummois,'libetat':libetat,'montantvalide':montantvalide,'datemodif':datemodif} %}
+
+     {% include 'PgGsbFraisBundle:ListeFrais:listefraishorsforfait.html.twig' with {'lesfraishorsforfait':lesfraishorsforfait,
+'nbjustificatifs':nbjustificatifs} %}
+ {% endif %}
 {% endblock %}
 {% endblock %}
