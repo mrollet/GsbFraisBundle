@@ -1,10 +1,10 @@
 <?php
+
 namespace Pg\GsbFraisBundle\Controller;
 require_once("include/fct.inc.php");
-require_once ("include/class.pdogsb.inc.php");
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
-use PdoGsb;
+use Pg\GsbFraisBundle\services;
 class ListeFraisController extends Controller
 {
     public function indexAction()
@@ -12,8 +12,8 @@ class ListeFraisController extends Controller
 //        $session= $this->container->get('request')->getSession();
         $session= $this->get('request')->getSession();
         $idVisiteur =  $session->get('id');
-        $pdo = PdoGsb::getPdoGsb();
-//        $pdo = $this->get('pg_gsb_frais.pdo');
+//        $pdo = PdoGsb::getPdoGsb();
+        $pdo = $this->get('pg_gsb_frais.pdo');
         $lesMois=$pdo->getLesMoisDisponibles($idVisiteur);
         if($this->get('request')->getMethod() == 'GET'){
                 // Afin de sélectionner par défaut le dernier mois dans la zone de liste

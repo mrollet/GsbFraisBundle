@@ -1,11 +1,12 @@
 <?php
+
 namespace Pg\GsbFraisBundle\Controller;
 require_once("include/fct.inc.php");
-require_once ("include/class.pdogsb.inc.php");
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Response;
-use PdoGsb;
+use Pg\GsbFraisBundle\services;
+//use PdoGsb;
 class SaisirFraisController extends Controller
 {
     public function indexAction()
@@ -15,8 +16,8 @@ class SaisirFraisController extends Controller
         $mois = getMois(date("d/m/Y"));
         $numAnnee =substr( $mois,0,4);
         $numMois =substr( $mois,4,2);
-        $pdo = PdoGsb::getPdoGsb();
-//        $pdo = $this->get('pg_gsb_frais.pdo');
+//        $pdo = PdoGsb::getPdoGsb();
+        $pdo = $this->get('pg_gsb_frais.pdo');
         if($pdo->estPremierFraisMois($idVisiteur,$mois)){
                                 $pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
         }
@@ -43,8 +44,8 @@ class SaisirFraisController extends Controller
                 $mois = getMois(date("d/m/Y"));
                 $numAnnee =substr( $mois,0,4);
                 $numMois =substr( $mois,4,2);
-                $pdo = PdoGsb::getPdoGsb();
-//                $pdo = $this->get('pg_gsb_frais.pdo');
+//                $pdo = PdoGsb::getPdoGsb();
+                $pdo = $this->get('pg_gsb_frais.pdo');
                 $request = $this->get('request');
                 $dateFrais = $request->request->get('dateFrais');
 		$libelle = $request->request->get('libelle');
@@ -68,8 +69,8 @@ class SaisirFraisController extends Controller
                 $mois = getMois(date("d/m/Y"));
                 $numAnnee =substr( $mois,0,4);
                 $numMois =substr( $mois,4,2);
-                $pdo = PdoGsb::getPdoGsb();
-//               $pdo = $this->get('pg_gsb_frais.pdo');
+//                $pdo = PdoGsb::getPdoGsb();
+               $pdo = $this->get('pg_gsb_frais.pdo');
                 if( $pdo->estValideSuppressionFrais($idVisiteur,$mois,$id))
                             $pdo->supprimerFraisHorsForfait($id);
                 else {

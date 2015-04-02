@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+namespace Pg\GsbFraisBundle\services;
 /** 
  * Classe d'accès aux données. 
  
@@ -15,19 +16,17 @@
  * @link       http://www.php.net/manual/fr/book.pdo.php
  */
 
+use PDO;
 class PdoGsb{   		
-      	private static $serveur='mysql:host=localhost';
-      	private static $bdd='dbname=gsb_frais';   		
-      	private static $user='root' ;    		
-      	private static $mdp='sa' ;	
+      		
 	private static $monPdo;
 	private static $monPdoGsb=null;
 /**
  * Constructeur privé, crée l'instance de PDO qui sera sollicitée
  * pour toutes les méthodes de la classe
  */				
-	private function __construct(){
-    	PdoGsb::$monPdo = new PDO(PdoGsb::$serveur.';'.PdoGsb::$bdd, PdoGsb::$user, PdoGsb::$mdp); 
+	public function __construct($serveur,$bdd,$user,$mdp){
+    	PdoGsb::$monPdo = new PDO($serveur.';'.$bdd, $user, $mdp); 
 		PdoGsb::$monPdo->query("SET CHARACTER SET utf8");
                 PdoGsb::$monPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //pour les tests
 	}
